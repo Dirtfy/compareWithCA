@@ -1,5 +1,7 @@
 /target
 
+.idea
+
 input.txt
 input.exe
 CA.txt
