@@ -35,6 +35,8 @@ fn main() {
     println!("ca output file path: {ca_output_file_path}");
     println!("wa output file path: {wa_output_file_path}");
 
+    let mut test_count = 0;
+
     loop {
         match command::make_input_file(
             &generator_path,
@@ -74,8 +76,14 @@ fn main() {
         match test::test(ca_file, wa_file) {
             Ok(line_number) => {
                 if line_number != 0 {
-                    println!("Test result: {line_number}");
+                    println!("differ at line {line_number}");
                     break;
+                }
+                else {
+                    test_count += 1;
+                    if test_count % 100 == 0 {
+                        println!("{test_count} test passed");
+                    }
                 }
             },
             Err(e) => {
